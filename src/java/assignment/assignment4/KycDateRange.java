@@ -6,7 +6,7 @@ import java.util.*;
 
 public class KycDateRange {
 
-    static void printRange(Calendar signUpCalender,Calendar currentCalender)
+    static List<String> getRange(Calendar signUpCalender,Calendar currentCalender)
     {
 
         // get the aniversery of the signup date in this year by adding the diff of the years of the two date
@@ -24,11 +24,22 @@ public class KycDateRange {
         leftRange.add(leftRange.DATE,-30);
         rightRange.add(rightRange.DATE,30);
 
+        //list which holds the result
+        List<String> result = new Vector<String>();
+
         // for backdate if the current date is within the window then modify the window
-        if(rightRange.compareTo(currentCalender)>0)
-            System.out.println(getCalendar(leftRange)+" "+getCalendar(currentCalender));
-        else
-            System.out.println(getCalendar(leftRange)+" "+getCalendar(rightRange));
+        if(rightRange.compareTo(currentCalender)>0){
+            result.add(getCalendar(leftRange));
+            result.add(getCalendar(currentCalender));
+            return result;
+        }
+
+        else{
+            result.add(getCalendar(leftRange));
+            result.add(getCalendar(rightRange));
+            return result;
+        }
+
     }
 
 
@@ -73,7 +84,10 @@ public class KycDateRange {
 
                 // if the signup year is same as current year then there is no range
                 if(signUpCalender.get(Calendar.YEAR)==currentCalender.get(Calendar.YEAR)) System.out.println("No range");
-                else printRange(signUpCalender,currentCalender);
+                else {
+                    List<String> result=getRange(signUpCalender,currentCalender);
+                    System.out.println(result.get(0)+" "+result.get(1));
+                }
 
             }catch(Exception exp){
                     System.out.println("enter the date in correct format");
