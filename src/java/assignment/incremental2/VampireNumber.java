@@ -1,6 +1,6 @@
 package assignment.incremental2;
 
-public class vampire_no {
+public class VampireNumber {
     // keep the count of vampire number encuontered till now
     static int t=0;
 
@@ -8,7 +8,7 @@ public class vampire_no {
     static int last=-1;
 
     //check wether the number is vampire or not
-    public static void check_vam(int arr[],int size,int no){
+    public static String checkVampireNumber(int arr[],int size,int no){
             int l=0,r=0;
 
             // left sub number
@@ -18,20 +18,21 @@ public class vampire_no {
             for(int i=size/2;i<size;++i) r=r*10+arr[i];
 
             if(l*r==no) {
-                if(l%10==0 && r%10==0) return;  // to check wether both the fangs  have zero at last or not
+                if(l%10==0 && r%10==0) return "";  // to check wether both the fangs  have zero at last or not
 
                 // to check wether the last permutaion of the number could make fangs or not
                 else if(last==no){
-                    return;
+                    return "";
                 }
 
                 else{
                     ++t;   // increase the count
                     last=no; // update the last
-                    System.out.println(l+ " "+ r+" "+ no);
+                    return l+ " "+ r+" "+ no;
                 }
 
             }
+            return "";
     }
 
     public  static void swap(int arr[],int l,int r){
@@ -45,8 +46,12 @@ public class vampire_no {
 
     public static void permute(int arr[], int l, int r, int size,int no){
         int i;
-        if (l == r)
-            check_vam(arr,size,no);  //for each permutation check wether the number is prime or not
+        if (l == r){
+            String res=checkVampireNumber(arr,size,no);  //for each permutation check wether the number is prime or not
+            if(res=="") ;
+            else System.out.println(res);
+        }
+
         else
         {
             for (i = l; i <= r; i++)

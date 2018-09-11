@@ -1,17 +1,17 @@
 package assignment.incremental2;
 
-class Box
+public class ConstructorDemo
 {
     double width, height, depth;
 
     //constructor without parameter
-    Box()
+    ConstructorDemo()
     {
         height = depth = 0;
     }
 
     //constructor with parameter
-    Box(double len)
+    ConstructorDemo(double len)
     {
         this();   // call to the constructor without parameter
         width = len;
@@ -19,13 +19,13 @@ class Box
     }
 
     //function to print the values of the instance variable
-    void display(){
+    void getDimension(){
         System.out.println(width+ " "+ height+ " "+ depth);
     }
 
     public static void main(String[] args) {
-        Box b=new Box(5);
-        b.display();
+        ConstructorDemo b=new ConstructorDemo(5);
+        b.getDimension();
     }
 }
 
